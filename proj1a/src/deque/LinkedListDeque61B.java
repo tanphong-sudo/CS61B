@@ -51,6 +51,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         first = first.next;
         first.prev = sentinal;
         sentinal.next = first;
+        size--;
 
         return value;
     }
@@ -61,6 +62,7 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         last = last.prev;
         last.next = sentinal;
         sentinal.prev = last;
+        size--;
 
         return value;
     }
@@ -119,8 +121,8 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
         sentinal.next = sentinal;
         sentinal.prev = sentinal;
 
-        first = sentinal.next;
-        last = sentinal.prev;
+        first = sentinal;
+        last = sentinal;
         size = 0;
     }
 
