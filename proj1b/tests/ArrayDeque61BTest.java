@@ -117,4 +117,17 @@ public class ArrayDeque61BTest {
         assertThat(ad.size()).isEqualTo(9);
 
     }
+
+    @Test
+    void resizeTest() {
+        ArrayDeque61B<Integer> ad = new ArrayDeque61B<>();
+        for (int i = 0; i < 10; i++) {
+            ad.addLast(i);
+        }
+        assertThat(ad.size()).isEqualTo(10);
+        for (int i = 0; i < 5; i++) {
+            ad.removeFirst();
+        }
+        assertThat(ad.size()).isEqualTo(5);
+    }
 }

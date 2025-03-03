@@ -7,12 +7,14 @@ public class ArrayDeque61B <T> implements Deque61B<T> {
     private int first;
     private int last;
     private int size;
+    private int capacity;
     private T[] items;
 
     ArrayDeque61B() {
         first = 0;
         last = -1;
         size = 8;
+        capacity = 0;
         items = (T[]) new Object[8];
     }
 
@@ -35,6 +37,7 @@ public class ArrayDeque61B <T> implements Deque61B<T> {
         int s = Math.floorMod(first - 1, items.length);
         items[s] = x;
         first = first - 1;
+        capacity++;
     }
 
     @Override
@@ -45,6 +48,7 @@ public class ArrayDeque61B <T> implements Deque61B<T> {
         int l = Math.floorMod(last + 1, items.length);
         items[l] = x;
         last = last + 1;
+        capacity++;
     }
 
     @Override
@@ -58,20 +62,20 @@ public class ArrayDeque61B <T> implements Deque61B<T> {
 
     @Override
     public boolean isEmpty() {
-        return (first == 0 && last == -1);
+        return capacity == 0;
     }
 
     @Override
     public int size() {
-        if (isEmpty()) {
-            return 0;
-        }
-
-        return last - first + 1;
+        return capacity;
     }
 
     @Override
     public T removeFirst() {
+        if (size() < items.length / 4) {
+            resize(size / 2);
+        }
+        capacity--;
         T temp = items[Math.floorMod(first, size)];
         first++;
         return temp;
@@ -79,6 +83,10 @@ public class ArrayDeque61B <T> implements Deque61B<T> {
 
     @Override
     public T removeLast() {
+        if (size() < items.length / 4) {
+            resize(size / 2);
+        }
+        capacity--;
         T temp = items[Math.floorMod(last, size)];
         last--;
         return temp;
