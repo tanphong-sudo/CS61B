@@ -130,4 +130,61 @@ public class ArrayDeque61BTest {
         }
         assertThat(ad.size()).isEqualTo(5);
     }
+
+    @Test
+    void enahanceTest() {
+        Deque61B<String> lld1 = new LinkedListDeque61B<>();
+        Deque61B<String> lld2 = new LinkedListDeque61B<>();
+
+        lld1.addLast("front");
+        lld1.addLast("middle");
+        lld1.addLast("back");
+
+        lld2.addLast("front");
+        lld2.addLast("middle");
+        lld2.addLast("back");
+
+        assertThat(lld1).isEqualTo(lld2);
+    }
+
+    @Test
+    void forEach() {
+        ArrayDeque61B<Integer> ad = new ArrayDeque61B<>();
+        for (int i = 0; i < 10; i++) {
+            ad.addLast(i);
+        }
+
+        int sum = 0;
+        for (int num : ad) {
+            sum += num;
+        }
+        assertThat(sum).isEqualTo(45); // Sum of numbers from 0 to 9
+    }
+
+    @Test
+    void toStringTest() {
+        ArrayDeque61B<Integer> ad = new ArrayDeque61B<>();
+        ad.addLast(1);
+        ad.addLast(2);
+        ad.addLast(3);
+        assertThat(ad.toString()).isEqualTo("[1, 2, 3]");
+    }
+
+    @Test
+    void toStringListTest() {
+        Deque61B<Integer> ad = new LinkedListDeque61B<>();
+        ad.addLast(1);
+        ad.addLast(2);
+        ad.addLast(3);
+        assertThat(ad.toString()).isEqualTo("[1, 2, 3]");
+    }
+
+    @Test
+    void maxTest() {
+        MaxArrayDeque61B<Integer> mad = new MaxArrayDeque61B<>(Integer::compareTo);
+        mad.addLast(1);
+        mad.addLast(2);
+        mad.addLast(3);
+        assertThat(mad.max()).isEqualTo(3);
+    }
 }
